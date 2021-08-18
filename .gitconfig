@@ -1,0 +1,29 @@
+[user]
+	name = Dhinesh
+	email = test@gmail.com
+[alias]
+	st = status
+	d = diff
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	ll = log --all --decorate --oneline --graph
+	b = branch
+	bd = branch -d
+	c = commit -m
+	ck = checkout
+	ckb = checkout -b
+	amend = commit --amend --no-edit
+	a = add -A
+	af = add .
+	au = add -u 
+	ar = add --ignore-removal .
+	showfiles = show --pretty=\"format:\" --name-status
+	alias = config --get-regexp alias
+	h = rev-parse --verify
+	showalias = config --get-regexp alias
+	patch = "!f() { git am --signoff -k $1; }; f"
+	fpatch = "!f() { git format-patch --signoff -k --output-directory $1; }; f"
+	default = simple
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
