@@ -29,6 +29,8 @@
 	patch = "!f() { git am --signoff -k $1; }; f"
 	fpatch = "!f() { git format-patch --signoff -k --output-directory $1; }; f"
 	default = simple
+        purge = "!f() { git fetch -p && git branch -vv | awk '/: gone/{print $1}' > /tmp/gone-branches && vim /tmp/gone-branches && xargs git branch -D < /tmp/gone-branches ; }; f"
+	mybranches = "!f() { git branch -r | grep -v 'origin/HEAD ->' | xargs -L1 git --no-pager show -s --oneline --author=\"$(git config user.name)\"; }; f"
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
