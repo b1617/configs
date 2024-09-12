@@ -31,9 +31,6 @@
 	default = simple
         purge = "!f() { git fetch -p && git branch -vv | awk '/: gone/{print $1}' > /tmp/gone-branches && vim /tmp/gone-branches && xargs git branch -D < /tmp/gone-branches ; }; f"
 	mybranches = "!f() { git branch -r | grep -v 'origin/HEAD ->' | xargs -L1 git --no-pager show -s --oneline --author=\"$(git config user.name)\"; }; f"
-	skipped = "!f(){ git ls-files -v ${1} | grep ^S;};f"
-	skip = update-index --skip-worktree --
-	unskip = update-index --no-skip-worktree --
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
