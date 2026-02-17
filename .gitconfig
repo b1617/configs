@@ -1,13 +1,14 @@
 [user]
 	name = Dhinesh Sattia
-	email = test@gmail.com
+	email = sattia.dhinesh@gmail.com
 [alias]
 	st = status
 	d = diff
 	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	ll = log --all --decorate --oneline --graph
 	b = branch
-	bd = branch -D
+	bs = "!git branch | sed 's/^\\* *//' | sed 's/^  *//' | fzf --height 40% --reverse --border | xargs git checkout"
+	bd = "!git branch | grep -v '^\\*' | sed 's/^  *//' | fzf --height 40% --reverse --border --header='Select branch to delete' | xargs git branch -D"
 	c = commit -m
 	co = checkout
 	cob = checkout -b
@@ -19,7 +20,7 @@
 	amend = commit --amend --no-edit
 	a = add -A
 	af = add .
-	au = add -u 
+	au = add -u
 	ar = add --ignore-removal .
 	unstash = stash apply 0
 	showfiles = show --pretty=\"format:\" --name-status
