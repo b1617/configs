@@ -7,8 +7,9 @@
 	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	ll = log --all --decorate --oneline --graph
 	b = branch
-	bs = "!git branch | grep -v '^\*' | sed 's/^  *//' | fzf --height 40% --reverse --border | xargs git checkout"
+	bs = "!git branch | grep -v '^\\*' | sed 's/^  *//' | fzf --height 40% --reverse --border | xargs git checkout"
 	bd = "!git branch | grep -v '^\\*' | sed 's/^  *//' | fzf --height 40% --reverse --border --header='Select branch to delete' | xargs git branch -D"
+	bm = "!git branch | grep -v '^\\*' | sed 's/^  *//' | fzf --height 40% --reverse --border --header='Select branch to merge' | xargs git merge"
 	c = commit -m
 	co = checkout
 	cob = checkout -b
@@ -30,9 +31,10 @@
 	showalias = config --get-regexp alias
 	patch = "!f() { git am --signoff -k $1; }; f"
 	fpatch = "!f() { git format-patch --signoff -k --output-directory $1; }; f"
-	default = simple
-        purge = "!f() { git fetch -p && git branch -vv | awk '/: gone/{print $1}' > /tmp/gone-branches && vim /tmp/gone-branches && xargs git branch -D < /tmp/gone-branches ; }; f"
+	purge = "!f() { git fetch -p && git branch -vv | awk '/: gone/{print $1}' > /tmp/gone-branches && vim /tmp/gone-branches && xargs git branch -D < /tmp/gone-branches ; }; f"
 	mybranches = "!f() { git branch -r | grep -v 'origin/HEAD ->' | xargs -L1 git --no-pager show -s --oneline --author=\"$(git config user.name)\"; }; f"
+[push]
+	default = simple
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
