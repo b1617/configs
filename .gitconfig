@@ -21,6 +21,7 @@
 	p = push
 	pf = push -f
 	fo = fetch origin
+	fom = fetch origin main
 	amend = commit --amend --no-edit
 	a = add -A
 	af = add .
